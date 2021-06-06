@@ -18,7 +18,8 @@ struct CategoryItem: View {
         VStack(alignment: .leading) {
 
             landmark.image
-
+                .renderingMode(.original)
+                
                 .resizable()
 
                 .frame(width: 155, height: 155)
@@ -27,6 +28,8 @@ struct CategoryItem: View {
 
             Text(landmark.name)
 
+                .foregroundColor(.primary)
+                
                 .font(.caption)
 
         }
