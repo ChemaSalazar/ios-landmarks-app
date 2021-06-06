@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import Combine
 
-var landmarks: [Landmark] = load("landmarkData.json")
+
+//Define location of bound data.
+final class ModelData: ObservableObject {
+    //this is the file subscriber's get new data changes from
+    @Published var landmarks: [Landmark] = load("landmarkData.json")
+}
+
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
