@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct LandmarkList: View {
+    @State private var showFavoritesOnly = false
+    
+    
+    var filteredLandmarks: [Landmark] {
+        landmarks.filter{ Landmark in
+            (!showFavoritesOnly || Landmark.isFavorite)
+            
+        }
+    }
+    
+    
+    
     var body: some View {
         NavigationView{
-            List(landmarks) {Landmark in
-                NavigationLink(destination: LandmarkDetail(landmark: Landmark)) {
-                    LandmarkRow(landmark: Landmark)
+            List {
+                
+                //Adding a toggle to pass the binding value of isFavorite state.
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
+                }
+                
+                
+                ForEach(filteredLandmarks) {Landmark in
+                    NavigationLink(destination: LandmarkDetail(landmark: Landmark)) {
+                        LandmarkRow(landmark: Landmark)
+                    }
                 }
             }
-            
             .navigationTitle("Landmarks")
         }
     
